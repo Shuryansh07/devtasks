@@ -1,0 +1,59 @@
+# ---------------------------------------------------------------------------- #
+#                                 What is React                                #
+# ---------------------------------------------------------------------------- #
+React is a JavaScript library (not a framework) created by Meta (Facebook) to build user interfaces.
+
+Think of React as:
+
+A way to build components like LEGO blocks.
+
+It helps you update only the part of the page that changes (without reloading the whole page).
+
+You write in a mix of HTML + JS called JSX.
+
+✅ Don't worry if you don’t know JSX yet — you'll get used to it fast.
+
+# ---------------------------------------------------------------------------- #
+#                                  What is JSX                                 #
+# ---------------------------------------------------------------------------- #
+
+🔶 JSX stands for JavaScript XML
+It lets you write HTML inside JavaScript.
+
+👉 Example:
+
+js
+const element = <h1>Hello Dev!</h1>;
+React transforms this into regular JavaScript under the hood.
+
+🔧 Why JSX is Useful:
+You don’t have to use document.createElement() manually
+
+You can embed variables inside JSX like this:
+
+js
+Copy code
+const username = "Shuryansh";
+return <h2>Hello, {username}</h2>;
+
+# ---------------------------------------------------------------------------- #
+#                           What is a React Component                          #
+# ---------------------------------------------------------------------------- #
+
+ A component is a reusable block of UI.
+function Greeting() {
+  return <h1>Hello!</h1>;
+}
+We can then use it like this:
+<Greeting />
+
+
+
+# ---------------------------------------------------------------------------- #
+#                             Task Item Learnings:                             #
+# ---------------------------------------------------------------------------- #
+props:  Short for "properties", allows us to pass data into components.
+{props.title}  You can  access props like object fields
+style = {style.card}  You can write CSS as JS object
+export default  Make this component usable in other files 
+
