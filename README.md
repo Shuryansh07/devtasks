@@ -61,17 +61,15 @@ devtasks/
 
 **Shuryansh Gupta**
 Learning React by building this project in public 🚀
-[GitHub Profile](https://github.com/Shuryansh07)
-❤️Contact me for collab and doubts:
-[X] (https://x.com/ShuryanshG2111)
-[Linkedin] (https://www.linkedin.com/in/shuryansh-gupta/)
+
+📌 [GitHub Profile](https://github.com/Shuryansh07)  
+🐦 [Twitter / X](https://x.com/ShuryanshG2111)  
+💼 [LinkedIn](https://www.linkedin.com/in/shuryansh-gupta/)
+
+❤️ Contact me for collaboration or doubts!
 
 ---
 
 ## 📝 License
 
 This project is open-source and free to use under the MIT License.
-
-```
-
-```
