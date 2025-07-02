@@ -53,6 +53,10 @@ devtasks/
 │   ├── index.js
 │   └── index.css
 
+```
+
+---
+
 ## 👨‍💻 Author
 
 **Shuryansh Gupta**
@@ -64,4 +68,7 @@ Learning React by building this project in public 🚀
 ## 📝 License
 
 This project is open-source and free to use under the MIT License.
+
+```
+
 ```
