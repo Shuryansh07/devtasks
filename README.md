@@ -43,21 +43,20 @@ _(Coming soon once UI is ready)_
 
 ## 📁 Folder Structure (Simplified)
 
+```bash
 devtasks/
 ├── public/
 ├── src/
-│ ├── components/
-│ │ └── TaskItem.js
-│ ├── App.js
-│ ├── index.js
-│ └── index.css
-
----
+│   ├── components/
+│   │   └── TaskItem.js
+│   ├── App.js
+│   ├── index.js
+│   └── index.css
 
 ## 👨‍💻 Author
 
-**Shuryansh Gupta**  
-Learning React by building this project in public 🚀  
+**Shuryansh Gupta**
+Learning React by building this project in public 🚀
 [GitHub Profile](https://github.com/Shuryansh07)
 
 ---
@@ -65,3 +64,4 @@ Learning React by building this project in public 🚀
 ## 📝 License
 
 This project is open-source and free to use under the MIT License.
+```
