@@ -1,0 +1,25 @@
+# ---------------------------------------------------------------------------- #
+#                                   tasks.js                                   #
+# ---------------------------------------------------------------------------- #
+
+🔹 Concept: External Data / Mock API
+Instead of writing task data directly in App.js, we moved it to a separate file called tasks.js.
+
+✅ Why We Did This:
+Benefit	Meaning
+🧼 Cleaner Code	 logic is now separated from UI
+🔁 Reusable	we can use this task data anywhere — not just in App.js
+🔌 Mock API	Prepares us for fetching data from a real API later (useEffect coming on Day 3)
+📦 Scalable	we can manage more tasks without cluttering your UI file
+
+ # ---------------------------------------------------------------------------- #
+ #                 Concept: .map() — Looping Over Data in React                 #
+ # ---------------------------------------------------------------------------- #
+
+In React, we use .map() to generate JSX for each item.
+
+React Benefit	Explanation
+🎨 Dynamically generate UI	It builds one TaskItem for each task object
+🔁 DRY principle	Don't Repeat Yourself — 1 component, reused 3+ times
+🧠 Functional pattern	You use JS functions (like .map) directly inside JSX
+🆔 key prop	React requires a unique key to track each item efficiently
