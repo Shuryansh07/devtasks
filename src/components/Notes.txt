@@ -11,7 +11,7 @@ It helps you update only the part of the page that changes (without reloading th
 
 You write in a mix of HTML + JS called JSX.
 
-✅ Don't worry if you don’t know JSX yet — you'll get used to it fast.
+
 
 # ---------------------------------------------------------------------------- #
 #                                  What is JSX                                 #
@@ -31,8 +31,7 @@ You don’t have to use document.createElement() manually
 
 You can embed variables inside JSX like this:
 
-js
-Copy code
+
 const username = "Shuryansh";
 return <h2>Hello, {username}</h2>;
 
