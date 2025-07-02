@@ -62,6 +62,9 @@ devtasks/
 **Shuryansh Gupta**
 Learning React by building this project in public 🚀
 [GitHub Profile](https://github.com/Shuryansh07)
+❤️Contact me for collab and doubts:
+[X] (https://x.com/ShuryanshG2111)
+[Linkedin] (https://www.linkedin.com/in/shuryansh-gupta/)
 
 ---
 
