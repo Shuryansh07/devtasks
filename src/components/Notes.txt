@@ -56,3 +56,8 @@ props:  Short for "properties", allows us to pass data into components.
 style = {style.card}  You can write CSS as JS object
 export default  Make this component usable in other files 
 
+Concept	Why It Matters
+useState()	-> Let your app remember values (like user input, task list)
+Forms in React ->	Let users type + submit data
+Event handling ->	Handle button clicks + input
+Props + State combo :->	Pass data AND update it dynamically
