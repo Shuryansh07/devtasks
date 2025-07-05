@@ -5,13 +5,17 @@ import initialTasks from "./data/tasks";
 
 function App() {
   const [tasks, setTasks] = useState(initialTasks);
-  const [filter, setFilter] = useState("All"); //  new state
+  const [filter, setFilter] = useState("All");
 
   const handleAddTask = (newTask) => {
     setTasks([newTask, ...tasks]);
   };
 
-  //  Filter the tasks based on the filter selected
+  const handleDeleteTask = (idToDelete) => {
+    const updatedTasks = tasks.filter((task) => task.id !== idToDelete);
+    setTasks(updatedTasks);
+  };
+
   const filteredTasks =
     filter === "All" ? tasks : tasks.filter((task) => task.type === filter);
 
@@ -42,18 +46,22 @@ function App() {
         ))}
       </div>
 
-      {/* Task List */}
+      {/* Task List or Empty State */}
       {filteredTasks.length > 0 ? (
         filteredTasks.map((task) => (
           <TaskItem
             key={task.id}
+            id={task.id}
             title={task.title}
             type={task.type}
             status={task.status}
+            onDelete={handleDeleteTask}
           />
         ))
       ) : (
-        <p>No tasks found for this category.</p>
+        <p style={{ fontStyle: "italic", color: "gray" }}>
+          No tasks found for "{filter}".
+        </p>
       )}
     </div>
   );

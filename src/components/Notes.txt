@@ -61,3 +61,13 @@ useState()	-> Let your app remember values (like user input, task list)
 Forms in React ->	Let users type + submit data
 Event handling ->	Handle button clicks + input
 Props + State combo :->	Pass data AND update it dynamically
+
+ # ---------------------------------------------------------------------------- #
+ #                                 Day 4 Changes                                #
+ # ---------------------------------------------------------------------------- #
+
+ Feature	
+🗑️ Delete Task	Handle custom events, update list using .filter()
+❌ Empty State UI	Conditional rendering when no tasks
+📦 Prop drilling	Pass functions to child components
+✅ Clean commit	"Day 4: Added delete task feature and empty state message"

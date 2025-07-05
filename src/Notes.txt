@@ -1,0 +1,9 @@
+# ---------------------------------------------------------------------------- #
+#                                     DAY $                                    #
+# ---------------------------------------------------------------------------- #
+
+Concept	Explanation
+.filter() for delete	Used to return all tasks except the one with matching ID
+onDelete prop	Function passed from parent → child to handle delete
+Custom event handler	You control what happens on button click
+Conditional UI	filteredTasks.length === 0 shows empty state message

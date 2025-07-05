@@ -1,22 +1,48 @@
 import React from "react";
 
-function TaskItem(props) {
+function TaskItem({ id, title, type, status, onDelete }) {
+  const boxStyle = {
+    border: "1px solid #ddd",
+    padding: "10px",
+    marginBottom: "10px",
+    backgroundColor: "#f9f9f9",
+    borderLeft:
+      type === "Bug"
+        ? "5px solid red"
+        : type === "Feature"
+        ? "5px solid green"
+        : "5px solid blue",
+    position: "relative",
+  };
+
+  const deleteBtnStyle = {
+    position: "absolute",
+    top: "10px",
+    right: "10px",
+    border: "none",
+    backgroundColor: "#e74c3c",
+    color: "white",
+    cursor: "pointer",
+    padding: "4px 8px",
+    borderRadius: "4px",
+  };
+
   return (
-    <div style={styles.card}>
-      <h3>{props.title}</h3>
-      <p>Type: {props.type}</p>
-      <p>Status: {props.status}</p>
+    <div style={boxStyle}>
+      <h3>{title}</h3>
+      <p>
+        <strong>Type:</strong>
+        {type}
+      </p>
+      <p>
+        <strong>Status:</strong>
+        {status}
+      </p>
+      <button style={deleteBtnStyle} onClick={() => onDelete(id)}>
+        Delete
+      </button>
     </div>
   );
 }
-
-const styles = {
-  card: {
-    border: "1px solid #ddd",
-    borderRadius: "8px",
-    padding: "12px",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-  },
-};
 
 export default TaskItem;
