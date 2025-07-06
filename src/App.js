@@ -6,6 +6,8 @@ import initialTasks from "./data/tasks";
 function App() {
   const [tasks, setTasks] = useState(initialTasks);
   const [filter, setFilter] = useState("All");
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
 
   const handleAddTask = (newTask) => {
     setTasks([newTask, ...tasks]);
@@ -16,8 +18,15 @@ function App() {
     setTasks(updatedTasks);
   };
 
-  const filteredTasks =
-    filter === "All" ? tasks : tasks.filter((task) => task.type === filter);
+  const filteredTasks = tasks.filter((task) => {
+    const matchesType = filter === "All" || task.type === filter;
+    const matchesStatus =
+      statusFilter === "All" || task.status === statusFilter;
+    const matchesSearch = task.title
+      .toLowerCase()
+      .includes(search.toLowerCase());
+    return matchesType && matchesStatus && matchesSearch;
+  });
 
   return (
     <div style={{ padding: "20px" }}>
@@ -44,6 +53,33 @@ function App() {
             {type}
           </button>
         ))}
+      </div>
+      {/* Search bar and status filter */}
+      <div
+        style={{
+          marginBottom: "20px",
+          display: "flex",
+          gap: "10px",
+          flexWrap: "wrap",
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Search by title..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{ padding: "8px", flex: "1" }}
+        />
+
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          style={{ padding: "8px" }}
+        >
+          <option value="All">All Statuses</option>
+          <option value="Complete">Complete</option>
+          <option value="Incomplete">Incomplete</option>
+        </select>
       </div>
 
       {/* Task List or Empty State */}
