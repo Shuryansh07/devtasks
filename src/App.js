@@ -1,13 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TaskItem from "./components/TaskItem";
 import AddTask from "./components/AddTask";
-import initialTasks from "./data/tasks";
+import FilterButton from "./components/FilterButton";
+import TaskList from "./components/TaskList";
 
 function App() {
-  const [tasks, setTasks] = useState(initialTasks);
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const res = await fetch(
+          "https://jsonplaceholder.typicode.com/todos?_limit=10"
+        );
+        if (!res.ok) throw new Error("Failed to Fetch tasks.");
+        const data = await res.json();
+
+        const formatted = data.map((task) => ({
+          id: task.id,
+          title: task.title,
+          type: ["Bug", "Feature", "Learning"][task.id % 3],
+          status: task.completed ? "Complete" : "Incomplete",
+        }));
+        setTasks(formatted);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTasks();
+  }, []);
 
   const handleAddTask = (newTask) => {
     setTasks([newTask, ...tasks]);
@@ -37,21 +65,12 @@ function App() {
       {/* Filter Buttons */}
       <div style={{ marginBottom: "15px" }}>
         {["All", "Bug", "Feature", "Learning"].map((type) => (
-          <button
+          <FilterButton
             key={type}
+            label={type}
+            isActive={filter === type}
             onClick={() => setFilter(type)}
-            style={{
-              marginRight: "10px",
-              padding: "6px 12px",
-              backgroundColor: filter === type ? "#007bff" : "#ccc",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
-            {type}
-          </button>
+          />
         ))}
       </div>
       {/* Search bar and status filter */}
@@ -82,23 +101,11 @@ function App() {
         </select>
       </div>
 
+      {loading && <p>loading tasks...</p>}
+      {error && <p style={{ color: "red" }}>Error: {error}</p>}
+
       {/* Task List or Empty State */}
-      {filteredTasks.length > 0 ? (
-        filteredTasks.map((task) => (
-          <TaskItem
-            key={task.id}
-            id={task.id}
-            title={task.title}
-            type={task.type}
-            status={task.status}
-            onDelete={handleDeleteTask}
-          />
-        ))
-      ) : (
-        <p style={{ fontStyle: "italic", color: "gray" }}>
-          No tasks found for "{filter}".
-        </p>
-      )}
+      <TaskList tasks={filteredTasks} onDelete={handleDeleteTask} />
     </div>
   );
 }

@@ -35,8 +35,15 @@ function TaskItem({ id, title, type, status, onDelete }) {
         {type}
       </p>
       <p>
-        <strong>Status:</strong>
-        {status}
+        <strong>Status:</strong>{" "}
+        <span
+          style={{
+            color: status === "complete" ? "green" : "red",
+            frontWeight: "bold",
+          }}
+        >
+          {status}
+        </span>
       </p>
       <button style={deleteBtnStyle} onClick={() => onDelete(id)}>
         Delete
