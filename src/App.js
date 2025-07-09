@@ -117,7 +117,11 @@ function App() {
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
 
       {/* Task List or Empty State */}
-      <TaskList tasks={filteredTasks} onDelete={handleDeleteTask} />
+      <TaskList
+        tasks={filteredTasks}
+        onDelete={handleDeleteTask}
+        onToggleStatus={handleToggleStatus}
+      />
     </div>
   );
 }
