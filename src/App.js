@@ -46,6 +46,18 @@ function App() {
     setTasks(updatedTasks);
   };
 
+  const handleToggleStatus = (id) => {
+    const updated = tasks.map((task) =>
+      task.id === id
+        ? {
+            ...task,
+            status: task.status === "Complete" ? "Incomplete" : "Complete",
+          }
+        : task
+    );
+    setTasks(updated);
+  };
+
   const filteredTasks = tasks.filter((task) => {
     const matchesType = filter === "All" || task.type === filter;
     const matchesStatus =
