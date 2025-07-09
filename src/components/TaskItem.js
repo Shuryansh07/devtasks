@@ -59,7 +59,7 @@ function TaskItem({ id, title, type, status, onDelete, onToggleStatus }) {
       </button>
 
       <button style={styles.toggleButton} onClick={() => onToggleStatus(id)}>
-        Toggle
+        {status === "Complete" ? "Mark Incomplete" : "Mark Complete"}
       </button>
     </div>
   );
