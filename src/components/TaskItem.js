@@ -1,6 +1,6 @@
 import React from "react";
 
-function TaskItem({ id, title, type, status, onDelete }) {
+function TaskItem({ id, title, type, status, onDelete, onToggleStatus }) {
   const boxStyle = {
     border: "1px solid #ddd",
     padding: "10px",
@@ -47,6 +47,23 @@ function TaskItem({ id, title, type, status, onDelete }) {
       </p>
       <button style={deleteBtnStyle} onClick={() => onDelete(id)}>
         Delete
+      </button>
+
+      <button
+        style={{
+          position: "absolute",
+          top: "10px",
+          left: "10px",
+          border: "none",
+          backgroundColor: "#3498db",
+          color: "white",
+          cursor: "pointer",
+          padding: "4px 8px",
+          borderRadius: "4px",
+        }}
+        onClick={() => onToggleStatus(id)}
+      >
+        Toggle
       </button>
     </div>
   );

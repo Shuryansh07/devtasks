@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import TaskItem from "./components/TaskItem";
 import AddTask from "./components/AddTask";
 import FilterButton from "./components/FilterButton";
 import TaskList from "./components/TaskList";
