@@ -106,7 +106,7 @@ function App() {
           onChange={(e) => setStatusFilter(e.target.value)}
           style={{ padding: "8px" }}
         >
-          <option value="All">All Statuses</option>
+          <option value="All">All</option>
           <option value="Complete">Complete</option>
           <option value="Incomplete">Incomplete</option>
         </select>
