@@ -6,7 +6,7 @@ function AddTask({ onAdd }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title.trim()) return;
+    if (!title.trim()) return; // ignore empty titles
 
     const newTask = {
       id: Date.now(),
@@ -15,8 +15,8 @@ function AddTask({ onAdd }) {
       status: "Incomplete",
     };
 
-    onAdd(newTask);
-    setTitle("");
+    onAdd(newTask); // pass task to App.js
+    setTitle(""); // reset form
     setType("Bug");
   };
 
