@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AddTask from "./components/AddTask";
 import FilterButton from "./components/FilterButton";
 import TaskList from "./components/TaskList";
@@ -11,30 +11,51 @@ function App() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const res = await fetch(
-          "https://jsonplaceholder.typicode.com/todos?_limit=10"
-        );
-        if (!res.ok) throw new Error("Failed to Fetch tasks.");
-        const data = await res.json();
+  const isFirstLoad = useRef(true);
 
-        const formatted = data.map((task) => ({
-          id: task.id,
-          title: task.title,
-          type: ["Bug", "Feature", "Learning"][task.id % 3],
-          status: task.completed ? "Complete" : "Incomplete",
-        }));
-        setTasks(formatted);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTasks();
+  useEffect(() => {
+    const savedTasks = localStorage.getItem("devtasks");
+    const parsed = savedTasks ? JSON.parse(savedTasks) : [];
+
+    if (parsed.length > 0) {
+      setTasks(parsed);
+      setLoading(false);
+    } else {
+      const fetchTasks = async () => {
+        try {
+          const res = await fetch(
+            "https://jsonplaceholder.typicode.com/todos?_limit=10"
+          );
+          if (!res.ok) throw new Error("Failed to Fetch tasks.");
+          const data = await res.json();
+
+          const formatted = data.map((task) => ({
+            id: task.id,
+            title: task.title,
+            type: ["Bug", "Feature", "Learning"][task.id % 3],
+            status: task.completed ? "Complete" : "Incomplete",
+          }));
+
+          if (isFirstLoad.current) {
+            setTasks(formatted);
+            localStorage.setItem("devtasks", JSON.stringify(formatted));
+          }
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchTasks();
+    }
+
+    isFirstLoad.current = false;
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("devtasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   const handleAddTask = (newTask) => {
     setTasks([newTask, ...tasks]);
@@ -73,7 +94,6 @@ function App() {
 
       <AddTask onAdd={handleAddTask} />
 
-      {/* Filter Buttons */}
       <div style={{ marginBottom: "15px" }}>
         {["All", "Bug", "Feature", "Learning"].map((type) => (
           <FilterButton
@@ -84,7 +104,7 @@ function App() {
           />
         ))}
       </div>
-      {/* Search bar and status filter */}
+
       <div
         style={{
           marginBottom: "20px",
@@ -112,10 +132,9 @@ function App() {
         </select>
       </div>
 
-      {loading && <p>loading tasks...</p>}
+      {loading && <p>Loading tasks...</p>}
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
 
-      {/* Task List or Empty State */}
       <TaskList
         tasks={filteredTasks}
         onDelete={handleDeleteTask}
