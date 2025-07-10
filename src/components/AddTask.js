@@ -2,56 +2,42 @@ import React, { useState } from "react";
 
 function AddTask({ onAdd }) {
   const [title, setTitle] = useState("");
-  const [type, setType] = useState("Feature");
-  const [status, setStatus] = useState("Incomplete");
+  const [type, setType] = useState("Bug");
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // prevents page reload
-
-    if (title.trim() === "") return;
+    e.preventDefault();
+    if (!title.trim()) return;
 
     const newTask = {
       id: Date.now(),
       title,
       type,
-      status,
+      status: "Incomplete",
     };
 
-    onAdd(newTask); // send task to parent
-    setTitle(""); // clear form
-    setType("Feature");
-    setStatus("Incomplete");
+    onAdd(newTask);
+    setTitle("");
+    setType("Bug");
   };
 
   return (
     <form onSubmit={handleSubmit} style={styles.form}>
       <input
         type="text"
-        placeholder="Enter task title"
         value={title}
+        placeholder="Task Title"
         onChange={(e) => setTitle(e.target.value)}
         style={styles.input}
       />
-
       <select
         value={type}
         onChange={(e) => setType(e.target.value)}
         style={styles.select}
       >
-        <option>Bug</option>
-        <option>Feature</option>
-        <option>Learning</option>
+        <option value="Bug">Bug</option>
+        <option value="Feature">Feature</option>
+        <option value="Learning">Learning</option>
       </select>
-
-      <select
-        value={status}
-        onChange={(e) => setStatus(e.target.value)}
-        style={styles.select}
-      >
-        <option>Incomplete</option>
-        <option>Complete</option>
-      </select>
-
       <button type="submit" style={styles.button}>
         Add Task
       </button>
@@ -67,17 +53,19 @@ const styles = {
     flexWrap: "wrap",
   },
   input: {
-    flex: 1,
+    flex: 2,
     padding: "8px",
   },
   select: {
+    flex: 1,
     padding: "8px",
   },
   button: {
+    padding: "8px 16px",
     backgroundColor: "#007bff",
     color: "white",
     border: "none",
-    padding: "8px 12px",
+    borderRadius: "4px",
     cursor: "pointer",
   },
 };
