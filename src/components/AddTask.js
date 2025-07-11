@@ -51,7 +51,11 @@ function AddTask({ onAdd }) {
         <option value="Feature">Feature</option>
         <option value="Learning">Learning</option>
       </select>
-      <button type="submit" style={styles.button}>
+      <button
+        type="submit"
+        style={styles.button}
+        disabled={title.trim() === ""}
+      >
         Add Task
       </button>
     </form>
