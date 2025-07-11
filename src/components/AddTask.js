@@ -5,15 +5,19 @@ function AddTask({ onAdd }) {
   const [type, setType] = useState("Bug");
   const [error, setError] = useState("");
   const [status, setStatus] = useState("Incomplete");
+  const [success, setSuccess] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title.trim() === "") {
       setError("Task title cannot be empty.");
+      setTimeout(() => setError(""), 3000);
       return;
     }
 
     setError("");
+    setSuccess("Task Added Successfully!");
+    setTimeout(() => setSuccess(""), 3000);
     const newTask = {
       id: Date.now(),
       title,
@@ -30,6 +34,7 @@ function AddTask({ onAdd }) {
   return (
     <form onSubmit={handleSubmit} style={styles.form}>
       {error && <p style={{ color: "red", margin: 0 }}>{error}</p>}
+      {success && <p style={{ color: "green", margin: 0 }}> {success}</p>}
       <input
         type="text"
         value={title}
