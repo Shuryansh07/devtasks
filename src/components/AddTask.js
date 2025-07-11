@@ -3,25 +3,32 @@ import React, { useState } from "react";
 function AddTask({ onAdd }) {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("Bug");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title.trim()) return; // ignore empty titles
+    if (title.trim() === "") {
+      setError("Task title cannot be empty.");
+      return;
+    }
 
+    setError("");
     const newTask = {
       id: Date.now(),
       title,
       type,
-      status: "Incomplete",
+      status,
     };
 
     onAdd(newTask); // pass task to App.js
     setTitle(""); // reset form
     setType("Bug");
+    setStatus("Incomplete");
   };
 
   return (
     <form onSubmit={handleSubmit} style={styles.form}>
+      {error && <p style={{ color: "red", margin: 0 }}>{error}</p>}
       <input
         type="text"
         value={title}
