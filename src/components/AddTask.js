@@ -4,6 +4,7 @@ function AddTask({ onAdd }) {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("Bug");
   const [error, setError] = useState("");
+  const [status, setStatus] = useState("Incomplete");
 
   const handleSubmit = (e) => {
     e.preventDefault();
