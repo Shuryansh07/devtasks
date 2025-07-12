@@ -77,6 +77,12 @@ function App() {
     );
     setTasks(updated);
   };
+  const handleUpdateTask = (id, updatedFields) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, ...updatedFields } : task
+    );
+    setTasks(updatedTasks);
+  };
 
   const filteredTasks = tasks.filter((task) => {
     const matchesType = filter === "All" || task.type === filter;
@@ -139,6 +145,7 @@ function App() {
         tasks={filteredTasks}
         onDelete={handleDeleteTask}
         onToggleStatus={handleToggleStatus}
+        onUpdate={handleUpdateTask}
       />
     </div>
   );

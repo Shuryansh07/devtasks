@@ -1,7 +1,7 @@
 import React from "react";
 import TaskItem from "./TaskItem";
 
-function TaskList({ tasks, onDelete, onToggleStatus }) {
+function TaskList({ tasks, onDelete, onToggleStatus, onUpdate }) {
   if (tasks.length === 0) {
     return (
       <div
@@ -28,6 +28,7 @@ function TaskList({ tasks, onDelete, onToggleStatus }) {
           status={task.status}
           onDelete={onDelete}
           onToggleStatus={onToggleStatus}
+          onUpdate={onUpdate}
         />
       ))}
     </>

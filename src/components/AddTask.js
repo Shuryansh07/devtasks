@@ -25,8 +25,8 @@ function AddTask({ onAdd }) {
       status,
     };
 
-    onAdd(newTask); // pass task to App.js
-    setTitle(""); // reset form
+    onAdd(newTask);
+    setTitle("");
     setType("Bug");
     setStatus("Incomplete");
   };
