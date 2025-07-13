@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as styles from "../styles/styles";
 
 function TaskItem({
   id,
@@ -14,30 +15,15 @@ function TaskItem({
   const [editedType, setEditedType] = useState(type);
   const [editedStatus, setEditedStatus] = useState(status);
 
+  // 👇 Dynamic left border based on type
   const cardStyle = {
-    border: "1px solid #ddd",
-    padding: "10px",
-    marginBottom: "10px",
-    backgroundColor: "#f9f9f9",
+    ...styles.card,
     borderLeft:
       type === "Bug"
         ? "5px solid red"
         : type === "Feature"
         ? "5px solid green"
         : "5px solid blue",
-    position: "relative",
-  };
-
-  const deleteBtnStyle = {
-    position: "absolute",
-    top: "10px",
-    right: "10px",
-    border: "none",
-    backgroundColor: "#e74c3c",
-    color: "white",
-    cursor: "pointer",
-    padding: "4px 8px",
-    borderRadius: "4px",
   };
 
   const handleSave = () => {
@@ -56,12 +42,13 @@ function TaskItem({
           <input
             value={editedTitle}
             onChange={(e) => setEditedTitle(e.target.value)}
-            style={{ marginBottom: "6px", width: "100%" }}
+            style={styles.inputFullWidth}
           />
-          <div style={{ display: "flex", gap: "10px", marginBottom: "6px" }}>
+          <div style={styles.editRow}>
             <select
               value={editedType}
               onChange={(e) => setEditedType(e.target.value)}
+              style={styles.select}
             >
               <option value="Bug">Bug</option>
               <option value="Feature">Feature</option>
@@ -71,15 +58,22 @@ function TaskItem({
             <select
               value={editedStatus}
               onChange={(e) => setEditedStatus(e.target.value)}
+              style={styles.select}
             >
               <option value="Complete">Complete</option>
               <option value="Incomplete">Incomplete</option>
             </select>
           </div>
-          <button onClick={handleSave}>Save</button>
+          <button onClick={handleSave} style={styles.button}>
+            Save
+          </button>
           <button
             onClick={() => setIsEditing(false)}
-            style={{ marginLeft: "8px" }}
+            style={{
+              ...styles.button,
+              backgroundColor: "#6c757d",
+              marginLeft: "8px",
+            }}
           >
             Cancel
           </button>
@@ -97,39 +91,16 @@ function TaskItem({
             </span>
           </p>
 
-          <button style={deleteBtnStyle} onClick={() => onDelete(id)}>
+          <button style={styles.deleteButton} onClick={() => onDelete(id)}>
             Delete
           </button>
           <button
-            style={{
-              position: "absolute",
-              top: "10px",
-              left: "10px",
-              backgroundColor: "#3498db",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              padding: "4px 8px",
-              cursor: "pointer",
-            }}
+            style={styles.toggleButton}
             onClick={() => onToggleStatus(id)}
           >
             {status === "Complete" ? "Mark Incomplete" : "Mark Complete"}
           </button>
-          <button
-            style={{
-              position: "absolute",
-              bottom: "10px",
-              right: "10px",
-              backgroundColor: "#f39c12",
-              color: "white",
-              border: "none",
-              padding: "4px 8px",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-            onClick={() => setIsEditing(true)}
-          >
+          <button style={styles.editButton} onClick={() => setIsEditing(true)}>
             Edit
           </button>
         </>

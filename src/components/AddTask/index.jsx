@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as styles from "../styles/styles";
 
 function AddTask({ onAdd }) {
   const [title, setTitle] = useState("");
@@ -34,7 +35,7 @@ function AddTask({ onAdd }) {
   return (
     <form onSubmit={handleSubmit} style={styles.form}>
       {error && <p style={{ color: "red", margin: 0 }}>{error}</p>}
-      {success && <p style={{ color: "green", margin: 0 }}> {success}</p>}
+      {success && <p style={{ color: "green", margin: 0 }}>{success}</p>}
       <input
         type="text"
         value={title}
@@ -61,30 +62,5 @@ function AddTask({ onAdd }) {
     </form>
   );
 }
-
-const styles = {
-  form: {
-    display: "flex",
-    gap: "10px",
-    marginBottom: "20px",
-    flexWrap: "wrap",
-  },
-  input: {
-    flex: 2,
-    padding: "8px",
-  },
-  select: {
-    flex: 1,
-    padding: "8px",
-  },
-  button: {
-    padding: "8px 16px",
-    backgroundColor: "#007bff",
-    color: "white",
-    border: "none",
-    borderRadius: "4px",
-    cursor: "pointer",
-  },
-};
 
 export default AddTask;
