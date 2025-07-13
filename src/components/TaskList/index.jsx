@@ -1,17 +1,11 @@
 import React from "react";
-import TaskItem from "./TaskItem";
+import TaskItem from "../TaskItem";
+import * as styles from "../styles/styles";
 
 function TaskList({ tasks, onDelete, onToggleStatus, onUpdate }) {
   if (tasks.length === 0) {
     return (
-      <div
-        style={{
-          padding: "20px",
-          textAlign: "center",
-          color: "gray",
-          fontStyle: "italic",
-        }}
-      >
+      <div style={styles.emptyState}>
         No tasks match your filters or search.
       </div>
     );
