@@ -1,79 +1,109 @@
 // src/styles/styles.js
 
-// 🧩 Shared Button Base
-const baseButton = {
-  padding: "6px 12px",
-  color: "white",
-  border: "none",
-  borderRadius: "4px",
-  cursor: "pointer",
-};
-
-// 🗂️ Card layout (used in TaskItem)
 export const card = {
+  fontSize: "15px",
   border: "1px solid #ddd",
-  padding: "10px",
-  marginBottom: "10px",
-  backgroundColor: "#f9f9f9",
+  padding: "20px 24px",
+  marginBottom: "16px",
+  backgroundColor: "#fff",
   position: "relative",
+  borderRadius: "10px",
+  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
 };
 
-// 🧾 Form styles (used in AddTask)
+export const cardHover = {
+  ...card,
+  transition: "box-shadow 0.3s ease, transform 0.2s ease",
+  boxShadow: "0 6px 16px rgba(0, 0, 0, 0.1)",
+  transform: "translateY(-2px)",
+};
+
 export const form = {
   display: "flex",
-  gap: "10px",
-  marginBottom: "20px",
+  gap: "12px",
+  marginBottom: "24px",
   flexWrap: "wrap",
 };
 
 export const input = {
   flex: 2,
-  padding: "8px",
+  padding: "10px",
+  border: "1px solid #ccc",
+  borderRadius: "6px",
+  fontSize: "14px",
+};
+
+export const inputFullWidth = {
+  width: "100%",
+  padding: "10px",
+  marginBottom: "8px",
+  border: "1px solid #ccc",
+  borderRadius: "6px",
+  fontSize: "14px",
 };
 
 export const select = {
   flex: 1,
-  padding: "8px",
+  padding: "10px",
+  border: "1px solid #ccc",
+  borderRadius: "6px",
+  fontSize: "14px",
 };
 
-// ✅ Buttons
 export const button = {
-  ...baseButton,
-  padding: "8px 16px",
+  padding: "10px 20px",
   backgroundColor: "#007bff",
+  color: "white",
+  border: "none",
+  borderRadius: "6px",
+  cursor: "pointer",
+  fontWeight: "500",
 };
 
 export const deleteButton = {
-  ...baseButton,
   position: "absolute",
-  top: "10px",
-  right: "10px",
+  top: "16px", // ↑ Increased from 12px
+  right: "16px", // ↑ Increased from 12px
   backgroundColor: "#e74c3c",
-  padding: "4px 8px",
+  color: "white",
+  border: "none",
+  borderRadius: "6px",
+  padding: "6px 12px",
+  cursor: "pointer",
 };
 
 export const toggleButton = {
-  ...baseButton,
   position: "absolute",
-  top: "10px",
-  left: "10px",
+  top: "16px", // ↑ Increased from 12px
+  left: "16px", // ↑ Increased from 12px
   backgroundColor: "#3498db",
-  padding: "4px 8px",
+  color: "white",
+  border: "none",
+  borderRadius: "6px",
+  padding: "6px 12px",
+  cursor: "pointer",
 };
 
 export const editButton = {
-  ...baseButton,
   position: "absolute",
-  bottom: "10px",
-  right: "10px",
+  bottom: "16px", // ↑ Increased from 12px
+  right: "16px", // ↑ Increased from 12px
   backgroundColor: "#f39c12",
-  padding: "4px 8px",
+  color: "white",
+  border: "none",
+  padding: "6px 12px",
+  borderRadius: "6px",
+  cursor: "pointer",
 };
 
-// 🟢 Filter Buttons
 export const filterButton = {
-  ...baseButton,
   marginRight: "10px",
+  padding: "8px 16px",
+  fontSize: "14px",
+  color: "white",
+  border: "none",
+  borderRadius: "6px",
+  cursor: "pointer",
 };
 
 export const activeButton = {
@@ -86,20 +116,20 @@ export const inactiveButton = {
   backgroundColor: "#ccc",
 };
 
-// 📋 Edit mode input and row
-export const inputFullWidth = {
-  marginBottom: "6px",
-  width: "100%",
-};
-
 export const editRow = {
   display: "flex",
   gap: "10px",
-  marginBottom: "6px",
+  marginBottom: "10px",
 };
+
 export const emptyState = {
-  padding: "20px",
+  padding: "24px",
   textAlign: "center",
-  color: "gray",
+  color: "#777",
   fontStyle: "italic",
+  fontSize: "16px",
+};
+export const titleSpacing = {
+  marginTop: "24px",
+  marginBottom: "8px",
 };
