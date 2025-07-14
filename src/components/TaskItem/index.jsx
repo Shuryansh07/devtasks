@@ -14,6 +14,7 @@ function TaskItem({
   const [editedTitle, setEditedTitle] = useState(title);
   const [editedType, setEditedType] = useState(type);
   const [editedStatus, setEditedStatus] = useState(status);
+  const [hovered, setHovered] = useState(false);
 
   // 👇 Dynamic left border based on type
   const cardStyle = {
@@ -36,7 +37,14 @@ function TaskItem({
   };
 
   return (
-    <div style={cardStyle}>
+    <div
+      style={{
+        ...cardStyle,
+        ...(hovered ? styles.cardHover : {}),
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       {isEditing ? (
         <>
           <input
@@ -80,11 +88,13 @@ function TaskItem({
         </>
       ) : (
         <>
-          <h3>{title}</h3>
-          <p>
+          <h3 style={styles.titleSpacing}>{title}</h3>
+
+          <p style={{ margin: "4px 0" }}>
             <strong>Type:</strong> {type}
           </p>
-          <p>
+
+          <p style={{ margin: "4px 0" }}>
             <strong>Status:</strong>{" "}
             <span style={{ color: status === "Complete" ? "green" : "red" }}>
               {status}
