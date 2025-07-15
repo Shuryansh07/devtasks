@@ -23,10 +23,11 @@ export const form = {
   gap: "12px",
   marginBottom: "24px",
   flexWrap: "wrap",
+  alignItems: "center",
 };
 
 export const input = {
-  flex: 2,
+  flex: "1 1 200px",
   padding: "10px",
   border: "1px solid #ccc",
   borderRadius: "6px",
@@ -43,7 +44,7 @@ export const inputFullWidth = {
 };
 
 export const select = {
-  flex: 1,
+  flex: "1 1 120px",
   padding: "10px",
   border: "1px solid #ccc",
   borderRadius: "6px",
@@ -132,4 +133,9 @@ export const emptyState = {
 export const titleSpacing = {
   marginTop: "24px",
   marginBottom: "8px",
+};
+export const container = {
+  maxWidth: "800px",
+  margin: "0 auto",
+  padding: "16px",
 };
