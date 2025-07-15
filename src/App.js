@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import AddTask from "./components/AddTask";
 import FilterButton from "./components/FilterButton";
 import TaskList from "./components/TaskList";
+import * as styles from "./components/styles/styles";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -95,6 +96,7 @@ function App() {
   });
 
   return (
+    // <div style={styles.container}>
     <div style={{ padding: "20px" }}>
       <h1>DevTasks - Developer Task Manager</h1>
 
