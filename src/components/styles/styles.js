@@ -139,3 +139,8 @@ export const container = {
   margin: "0 auto",
   padding: "16px",
 };
+export const gridContainer = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+  gap: "16px",
+};
