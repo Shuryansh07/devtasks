@@ -3,6 +3,7 @@ import AddTask from "./components/AddTask";
 import FilterButton from "./components/FilterButton";
 import TaskList from "./components/TaskList";
 import * as styles from "./components/styles/styles";
+import StatsPanel from "./components/StatsPanel";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -142,6 +143,8 @@ function App() {
 
       {loading && <p>Loading tasks...</p>}
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
+
+      <StatsPanel tasks={filteredTasks} />
 
       <TaskList
         tasks={filteredTasks}
