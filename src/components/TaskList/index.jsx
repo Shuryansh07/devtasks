@@ -13,18 +13,20 @@ function TaskList({ tasks, onDelete, onToggleStatus, onUpdate }) {
 
   return (
     <>
-      {tasks.map((task) => (
-        <TaskItem
-          key={task.id}
-          id={task.id}
-          title={task.title}
-          type={task.type}
-          status={task.status}
-          onDelete={onDelete}
-          onToggleStatus={onToggleStatus}
-          onUpdate={onUpdate}
-        />
-      ))}
+      <div style={styles.gridContainer}>
+        {tasks.map((task) => (
+          <TaskItem
+            key={task.id}
+            id={task.id}
+            title={task.title}
+            type={task.type}
+            status={task.status}
+            onDelete={onDelete}
+            onToggleStatus={onToggleStatus}
+            onUpdate={onUpdate}
+          />
+        ))}
+      </div>
     </>
   );
 }
