@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import AddTask from "./components/AddTask";
 import FilterButton from "./components/FilterButton";
 import TaskList from "./components/TaskList";
-import * as styles from "./components/styles/styles";
 import StatsPanel from "./components/StatsPanel";
+import ThemeToggle from "./components/ThemeToggle";
+import { useTheme } from "./context/ThemeContext";
+import useStyledTheme from "./hooks/useStyledTheme";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -12,6 +14,9 @@ function App() {
   const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
+
+  const { darkMode } = useTheme();
+  const { styles } = useStyledTheme();
 
   const isFirstLoad = useRef(true);
 
@@ -79,6 +84,7 @@ function App() {
     );
     setTasks(updated);
   };
+
   const handleUpdateTask = (id, updatedFields) => {
     const updatedTasks = tasks.map((task) =>
       task.id === id ? { ...task, ...updatedFields } : task
@@ -97,12 +103,13 @@ function App() {
   });
 
   return (
-    // <div style={styles.container}>
-    <div style={{ padding: "20px" }}>
+    <div style={styles.container(darkMode)}>
+      <ThemeToggle />
       <h1>DevTasks - Developer Task Manager</h1>
 
       <AddTask onAdd={handleAddTask} />
 
+      {/* Filter buttons by Type */}
       <div style={{ marginBottom: "15px" }}>
         {["All", "Bug", "Feature", "Learning"].map((type) => (
           <FilterButton
@@ -114,6 +121,7 @@ function App() {
         ))}
       </div>
 
+      {/* Search and Status Filter */}
       <div
         style={{
           marginBottom: "20px",
@@ -127,13 +135,13 @@ function App() {
           placeholder="Search by title..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          style={{ padding: "8px", flex: "1" }}
+          style={styles.input(darkMode)}
         />
 
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          style={{ padding: "8px" }}
+          style={styles.select(darkMode)}
         >
           <option value="All">All</option>
           <option value="Complete">Complete</option>
@@ -141,11 +149,14 @@ function App() {
         </select>
       </div>
 
+      {/* Loading & Error */}
       {loading && <p>Loading tasks...</p>}
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
 
+      {/* Stats Panel */}
       <StatsPanel tasks={filteredTasks} />
 
+      {/* Task List */}
       <TaskList
         tasks={filteredTasks}
         onDelete={handleDeleteTask}

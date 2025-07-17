@@ -1,10 +1,13 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import useStyledTheme from "../../hooks/useStyledTheme";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function StatsPanel({ tasks }) {
+  const { darkMode } = useStyledTheme();
+
   const total = tasks.length;
   const complete = tasks.filter((t) => t.status === "Complete").length;
   const incomplete = total - complete;
@@ -14,8 +17,22 @@ function StatsPanel({ tasks }) {
     return acc;
   }, {});
 
+  const panelStyle = {
+    padding: "24px",
+    backgroundColor: darkMode ? "#1e1e1e" : "#ffffff",
+    borderRadius: "10px",
+    boxShadow: darkMode
+      ? "0 2px 10px rgba(255, 255, 255, 0.05)"
+      : "0 2px 10px rgba(0, 0, 0, 0.08)",
+    marginBottom: "32px",
+    color: darkMode ? "#f0f0f0" : "#111",
+  };
+
   const badgeStyle = {
-    padding: "8px 16px",
+    paddingTop: "8px",
+    paddingBottom: "8px",
+    paddingLeft: "16px",
+    paddingRight: "16px",
     borderRadius: "30px",
     fontSize: "14px",
     fontWeight: "500",
@@ -25,18 +42,15 @@ function StatsPanel({ tasks }) {
   };
 
   return (
-    <div
-      style={{
-        padding: "24px",
-        backgroundColor: "#ffffff",
-        borderRadius: "10px",
-        boxShadow: "0 2px 10px rgba(0, 0, 0, 0.08)",
-        marginBottom: "32px",
-      }}
-    >
+    <div style={panelStyle}>
       {/* Header */}
       <h3
-        style={{ fontSize: "22px", marginBottom: "20px", textAlign: "center" }}
+        style={{
+          fontSize: "22px",
+          marginBottom: "20px",
+          textAlign: "center",
+          color: darkMode ? "#f1f1f1" : "#222",
+        }}
       >
         📊 Task Summary
       </h3>
@@ -65,7 +79,7 @@ function StatsPanel({ tasks }) {
           🐞 Bugs: {typeCount["Bug"] || 0}
         </div>
         <div
-          style={{ ...badgeStyle, backgroundColor: "#ffc107", color: "#000" }}
+          style={{ ...badgeStyle, backgroundColor: "#ffe066", color: "#000" }}
         >
           🌟 Features: {typeCount["Feature"] || 0}
         </div>
@@ -103,6 +117,9 @@ function StatsPanel({ tasks }) {
             plugins: {
               legend: {
                 position: "bottom",
+                labels: {
+                  color: darkMode ? "#ccc" : "#333", // 💡 dark mode text
+                },
               },
             },
             maintainAspectRatio: false,

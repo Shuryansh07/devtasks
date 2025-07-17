@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import * as styles from "../styles/styles";
+import useStyledTheme from "../../hooks/useStyledTheme";
 
 function AddTask({ onAdd }) {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("Bug");
-  const [error, setError] = useState("");
   const [status, setStatus] = useState("Incomplete");
+  const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  const { darkMode, styles } = useStyledTheme(); // ✅ include styles here
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,42 +21,45 @@ function AddTask({ onAdd }) {
     setError("");
     setSuccess("Task Added Successfully!");
     setTimeout(() => setSuccess(""), 3000);
-    const newTask = {
+
+    onAdd({
       id: Date.now(),
       title,
       type,
       status,
-    };
+    });
 
-    onAdd(newTask);
     setTitle("");
     setType("Bug");
     setStatus("Incomplete");
   };
 
   return (
-    <form onSubmit={handleSubmit} style={styles.form}>
+    <form onSubmit={handleSubmit} style={styles.form(darkMode)}>
       {error && <p style={{ color: "red", margin: 0 }}>{error}</p>}
       {success && <p style={{ color: "green", margin: 0 }}>{success}</p>}
+
       <input
         type="text"
         value={title}
         placeholder="Task Title"
         onChange={(e) => setTitle(e.target.value)}
-        style={styles.input}
+        style={styles.input(darkMode)}
       />
+
       <select
         value={type}
         onChange={(e) => setType(e.target.value)}
-        style={styles.select}
+        style={styles.select(darkMode)}
       >
         <option value="Bug">Bug</option>
         <option value="Feature">Feature</option>
         <option value="Learning">Learning</option>
       </select>
+
       <button
         type="submit"
-        style={styles.button}
+        style={styles.button(darkMode)}
         disabled={title.trim() === ""}
       >
         Add Task
