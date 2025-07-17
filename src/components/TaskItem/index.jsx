@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as styles from "../styles/styles";
+import useStyledTheme from "../../hooks/useStyledTheme";
 
 function TaskItem({
   id,
@@ -16,16 +16,11 @@ function TaskItem({
   const [editedStatus, setEditedStatus] = useState(status);
   const [hovered, setHovered] = useState(false);
 
-  // 👇 Dynamic left border based on type
-  const cardStyle = {
-    ...styles.card,
-    borderLeft:
-      type === "Bug"
-        ? "5px solid red"
-        : type === "Feature"
-        ? "5px solid green"
-        : "5px solid blue",
-  };
+  const { darkMode, styles } = useStyledTheme();
+
+  const cardStyle = hovered
+    ? styles.cardHover(type, darkMode)
+    : styles.card(type, darkMode);
 
   const handleSave = () => {
     onUpdate(id, {
@@ -38,10 +33,7 @@ function TaskItem({
 
   return (
     <div
-      style={{
-        ...cardStyle,
-        ...(hovered ? styles.cardHover : {}),
-      }}
+      style={cardStyle}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -50,13 +42,14 @@ function TaskItem({
           <input
             value={editedTitle}
             onChange={(e) => setEditedTitle(e.target.value)}
-            style={styles.inputFullWidth}
+            style={styles.inputFullWidth(darkMode)}
           />
+
           <div style={styles.editRow}>
             <select
               value={editedType}
               onChange={(e) => setEditedType(e.target.value)}
-              style={styles.select}
+              style={styles.select(darkMode)}
             >
               <option value="Bug">Bug</option>
               <option value="Feature">Feature</option>
@@ -66,19 +59,20 @@ function TaskItem({
             <select
               value={editedStatus}
               onChange={(e) => setEditedStatus(e.target.value)}
-              style={styles.select}
+              style={styles.select(darkMode)}
             >
               <option value="Complete">Complete</option>
               <option value="Incomplete">Incomplete</option>
             </select>
           </div>
-          <button onClick={handleSave} style={styles.button}>
+
+          <button onClick={handleSave} style={styles.button(darkMode)}>
             Save
           </button>
           <button
             onClick={() => setIsEditing(false)}
             style={{
-              ...styles.button,
+              ...styles.button(darkMode),
               backgroundColor: "#6c757d",
               marginLeft: "8px",
             }}
@@ -88,7 +82,7 @@ function TaskItem({
         </>
       ) : (
         <>
-          <h3 style={styles.titleSpacing}>{title}</h3>
+          <h3 style={styles.titleSpacing(darkMode)}>{title}</h3>
 
           <p style={{ margin: "4px 0" }}>
             <strong>Type:</strong> {type}
@@ -96,21 +90,29 @@ function TaskItem({
 
           <p style={{ margin: "4px 0" }}>
             <strong>Status:</strong>{" "}
-            <span style={{ color: status === "Complete" ? "green" : "red" }}>
+            <span
+              style={{ color: status === "Complete" ? "#28a745" : "#dc3545" }}
+            >
               {status}
             </span>
           </p>
 
-          <button style={styles.deleteButton} onClick={() => onDelete(id)}>
+          <button
+            style={styles.deleteButton(darkMode)}
+            onClick={() => onDelete(id)}
+          >
             Delete
           </button>
           <button
-            style={styles.toggleButton}
+            style={styles.toggleButton(darkMode)}
             onClick={() => onToggleStatus(id)}
           >
             {status === "Complete" ? "Mark Incomplete" : "Mark Complete"}
           </button>
-          <button style={styles.editButton} onClick={() => setIsEditing(true)}>
+          <button
+            style={styles.editButton(darkMode)}
+            onClick={() => setIsEditing(true)}
+          >
             Edit
           </button>
         </>
