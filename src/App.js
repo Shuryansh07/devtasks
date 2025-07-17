@@ -105,7 +105,35 @@ function App() {
   return (
     <div style={styles.container(darkMode)}>
       <ThemeToggle />
-      <h1>DevTasks - Developer Task Manager</h1>
+      <h1
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '18px',
+          textAlign: 'center',
+          padding: '18px 0',
+          margin: '24px 0',
+          border: '2px solid #007bff',
+          borderRadius: '12px',
+          background: darkMode ? '#23272f' : '#f0f8ff',
+          color: darkMode ? '#fff' : '#222',
+          boxShadow: darkMode
+            ? '0 2px 12px rgba(0,0,0,0.4)'
+            : '0 2px 12px rgba(0,123,255,0.10)',
+          fontWeight: 700,
+          fontSize: '2.1rem',
+          letterSpacing: '1px',
+          transition: 'all 0.3s',
+        }}
+      >
+        <img
+          src={process.env.PUBLIC_URL + '/DevTasks-logo.png'}
+          alt="DevTasks Logo"
+          style={{ height: '2.5em', width: '2.5em', borderRadius: '8px', boxShadow: '0 1px 4px rgba(0,0,0,0.10)', background: '#fff' }}
+        />
+        <span>DevTasks - Developer Task Manager</span>
+      </h1>
 
       <AddTask onAdd={handleAddTask} />
 
